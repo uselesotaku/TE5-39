@@ -1,0 +1,20 @@
+pipeline {
+	stages{
+	stage('GetCode'){
+			steps{
+				git branch:'main', url: 'https://github.com/uselesotaku/TE5-39.git'
+			}
+	}
+	stage('Build'){
+		steps{
+			sh 'mvn clean package'
+		}
+	}
+	stage('SonarQube analysis'){
+		steps{
+			withSonarQubeEnv('SonarQube 9.5.0'){	 }
+		}
+	}
+	}
+		
+}
